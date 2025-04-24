@@ -2,13 +2,27 @@ import { createContext, useState, useEffect } from "react";
 
 export const MealsContext = createContext({
   availableMeals: {},
-  addMeal: (meal) => {},
+  cart: [],
+  addMealToCart: (meal) => {},
+  debugResetLocalstorage: () => {},
   // TODO add rest
 });
 
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
+  const [cart, setCart] = useState([]);
 
+  // get localstorage 'cart' data and update cart state
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart);
+
+  // fetch availableMeals data from the backend
   useEffect(() => {
     async function loadAvailableMeals() {
       try {
@@ -33,8 +47,40 @@ export function MealsContextProvider({ children }) {
     loadAvailableMeals();
   }, []);
 
+  function addMealToCart(id, name, price) {
+    // ? add this filtering method to different function?
+    // ^ maybe validation.js? - must be created first!
+
+    setCart((prevCart) => {
+      const existingCartItem = prevCart.find((item) => item.id === id);
+
+      if (existingCartItem) {
+        return prevCart.map((prevCartItem) =>
+          prevCartItem.id === id
+            ? { ...prevCartItem, quantity: prevCartItem.quantity + 1 }
+            : prevCartItem
+        );
+      } else {
+        return [...prevCart, { id, name, price, quantity: 1 }];
+      }
+    });
+  }
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  function debugResetLocalstorage() {
+    localStorage.clear();
+    setCart([]);
+  }
+
   const mealsValue = {
-    availableMeals: availableMeals,
+    availableMeals,
+    // ? do we need to expose the whole `cart` state?
+    cart,
+    addMealToCart,
+    debugResetLocalstorage,
     // TODO add rest
   };
 

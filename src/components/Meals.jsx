@@ -8,16 +8,17 @@ import Meal from "./Meal";
 export default function Meals() {
   const { availableMeals } = use(MealsContext);
 
-  console.log(
-    `Type: ${typeof availableMeals}, 🔥Fetched availableMeals: `,
-    availableMeals
-  ); // DEBUG
+  // console.log(
+  //   `Type: ${typeof availableMeals}, 🔥Fetched availableMeals: `,
+  //   availableMeals
+  // ); // DEBUG
 
   return (
     <ul className="meals-list">
       {availableMeals.map((meal) => (
         <li className="mealItem" key={meal.id}>
           <Meal
+            id={meal.id}
             name={meal.name}
             price={meal.price}
             description={meal.description}
