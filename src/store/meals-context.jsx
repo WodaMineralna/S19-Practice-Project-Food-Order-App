@@ -3,11 +3,18 @@ import { createContext, useState, useEffect, useReducer } from "react";
 export const MealsContext = createContext({
   availableMeals: [],
   cart: [],
+  clearCart: () => {},
   addMeal: (meal) => {},
+  deleteMeal: (id) => {},
+  incrementMealQuantity: (id) => {},
+  decrementMealQuantity: (id) => {},
   debugResetLocalstorage: () => {}, // DEBUGGING
   isModalOpen: false,
 });
 
+// ?
+// ?TODO outsorce to another file? maybe custom hook?
+// ^ with all of the functions? (addMeal / clearCart / ...)
 export function cartReducer(prevCartState, action) {
   if (action.type === "ADD_MEAL") {
     const existingCartItem = prevCartState.find(
@@ -70,12 +77,12 @@ export function cartReducer(prevCartState, action) {
 // ?FIX less re-executes of the component
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
-  // const [cart, setCart] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   let initialCartState = [];
 
   // get localstorage 'cart' data and set it as initialCartState
-  function initFunction(initialCartState) {
+  function initCartFunction(initialCartState) {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       return JSON.parse(savedCart);
@@ -85,12 +92,9 @@ export function MealsContextProvider({ children }) {
   const [cart, cartDispatch] = useReducer(
     cartReducer,
     initialCartState,
-    initFunction
+    initCartFunction
   );
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // TODO put the useReducer code / functions (below) under other functions
   function addMeal(id, name, price) {
     cartDispatch({
       type: "ADD_MEAL",
@@ -154,6 +158,7 @@ export function MealsContextProvider({ children }) {
     loadAvailableMeals();
   }, []);
 
+  // update localStorage everytime the cart state updates
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
