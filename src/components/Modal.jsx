@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 
 import { MealsContext } from "../store/meals-context";
 import ModalCart from "./ModalCart";
+import ModalForm from "./ModalForm";
 
 export default function Modal() {
   const { isModalOpen, handleCloseModal } = use(MealsContext);
@@ -18,7 +19,8 @@ export default function Modal() {
         <button className="modal-close" onClick={handleCloseModal}>
           ×
         </button>
-        <ModalCart />
+        {/* <ModalCart /> */}
+        <ModalForm />
       </div>
     </div>,
     document.getElementById("modal")

@@ -122,6 +122,32 @@ header p {
   cursor: pointer;
 }
 
+.form-inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* FIX some of the styles are probably useless */
+.form-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-label {
+  margin: 0px 5px;
+  color: #29251c;
+  font-weight: bold;
+}
+
+.form-errors {
+  color: #c46111;
+  font-weight: bold;
+}
+
 /* for modal */
 @keyframes fade-slide-up {
   from {
