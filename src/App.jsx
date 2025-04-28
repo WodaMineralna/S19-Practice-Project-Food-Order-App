@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Meals from "./components/Meals";
+import Modal from "./components/Modal";
 
 import { MealsContextProvider } from "./store/meals-context";
 
@@ -8,6 +9,7 @@ function App() {
     <MealsContextProvider>
       <Header />
       <Meals />
+      <Modal />
     </MealsContextProvider>
   );
 }

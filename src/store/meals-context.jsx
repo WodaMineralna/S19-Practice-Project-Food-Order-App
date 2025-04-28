@@ -1,16 +1,21 @@
 import { createContext, useState, useEffect } from "react";
 
 export const MealsContext = createContext({
-  availableMeals: {},
+  availableMeals: [],
   cart: [],
   addMealToCart: (meal) => {},
-  debugResetLocalstorage: () => {},
-  // TODO add rest
+  debugResetLocalstorage: () => {}, // DEBUGGING
+  isModalOpen: false,
 });
 
+// ?
+// TODO in the future
+// ?FIX less re-executes of the component
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [cart, setCart] = useState([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // get localstorage 'cart' data and update cart state
   useEffect(() => {
@@ -47,9 +52,12 @@ export function MealsContextProvider({ children }) {
     loadAvailableMeals();
   }, []);
 
+  // * thats a 99% awesome idea, gtg rn
+  // ^ useReducer having a "ADDMEAL", "DELETEMEAL", "PLUSQUANTITY", "MINUSQUANTITY" stuff, something like that
+  // ? refactor to useReducer? - check Modal.jsx, comment @ line 29
   function addMealToCart(id, name, price) {
     // ? add this filtering method to different function?
-    // ^ maybe validation.js? - must be created first!
+    // ^ maybe util/validation.js? - must be created first!
 
     setCart((prevCart) => {
       const existingCartItem = prevCart.find((item) => item.id === id);
@@ -70,9 +78,20 @@ export function MealsContextProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // DEBUGGING
   function debugResetLocalstorage() {
     localStorage.clear();
     setCart([]);
+  }
+
+  function handleOpenModal() {
+    console.log("Modal opened");
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    console.log("Modal closed");
+    setIsModalOpen(false);
   }
 
   const mealsValue = {
@@ -80,8 +99,10 @@ export function MealsContextProvider({ children }) {
     // ? do we need to expose the whole `cart` state?
     cart,
     addMealToCart,
-    debugResetLocalstorage,
-    // TODO add rest
+    debugResetLocalstorage, // DEBUGGING
+    isModalOpen,
+    handleOpenModal,
+    handleCloseModal,
   };
 
   return (

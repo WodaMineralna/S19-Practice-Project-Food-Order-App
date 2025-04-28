@@ -58,6 +58,70 @@ header p {
   width: 100px;
 }
 
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  animation-name: fade-slide-up;
+  animation-duration: 1s;
+}
+
+.modal-list {
+  color: #15251c;
+  font-weight: bold;
+  list-style: none;
+  margin: none;
+  animation-name: fade-slide-up;
+  animation-duration: 1s;
+}
+
+/* ?TODO / CHANGE change model classnames / the amount of them etc */
+
+.modal-listItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-listItem-buttonsParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */ /* ? needed? */
+}
+
+.modal-listItem-button {
+  border-radius: 50%;
+  margin: 10%; /* ! probably will need fixing in the future */
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 /* for modal */
 @keyframes fade-slide-up {
   from {
