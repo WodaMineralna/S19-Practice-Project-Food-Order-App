@@ -21,8 +21,6 @@ export function cartReducer(prevCartState, action) {
       (item) => item.id === action.payload.id
     );
 
-    console.log(existingCartItem, " ASDASD");
-
     if (existingCartItem) {
       return cartReducer(prevCartState, {
         type: "INCREMENT_QUANTITY",
