@@ -3,8 +3,6 @@ import { MealsContext } from "../store/meals-context";
 
 import Meal from "./Meal";
 
-// ^ available meals - <ul> LIST
-// TODO meals data fetching
 export default function Meals() {
   const { availableMeals } = use(MealsContext);
 
@@ -13,6 +11,7 @@ export default function Meals() {
   //   availableMeals
   // ); // DEBUG
 
+  // TODO show a notification to the user, while the data is being fetched
   return (
     <ul className="meals-list">
       {availableMeals.map((meal) => (

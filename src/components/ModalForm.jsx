@@ -18,7 +18,6 @@ const ERROR_MESSAGES = {
 };
 
 export default function ModalForm() {
-  // ? can be put outside the ModalForm function?
   function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
     const email = formData.get("email");
@@ -55,6 +54,7 @@ export default function ModalForm() {
     }
 
     // TODO fetch data
+    // * Data fetching will be right there - to be implemented
 
     return { errors: null };
   }

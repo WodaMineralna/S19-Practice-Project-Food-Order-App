@@ -131,6 +131,10 @@ export function MealsContextProvider({ children }) {
 
   // ?
   // ?TODO add to a different file so it doesnt clutter this one so much, custom hook?
+  // !
+  // TODO show a notification to the user, while the data is being fetched
+  // ^ through a 'isFetching' state - the TRIO
+  // ^ also add a error state, availableMeals is already implemented (one of the three data fetching common states)
   // fetch availableMeals data from the backend
   useEffect(() => {
     async function loadAvailableMeals() {
