@@ -1,32 +1,134 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 
 export const MealsContext = createContext({
   availableMeals: [],
   cart: [],
-  addMealToCart: (meal) => {},
+  addMeal: (meal) => {},
   debugResetLocalstorage: () => {}, // DEBUGGING
   isModalOpen: false,
 });
+
+export function cartReducer(prevCartState, action) {
+  if (action.type === "ADD_MEAL") {
+    const existingCartItem = prevCartState.find(
+      (item) => item.id === action.payload.id
+    );
+
+    console.log(existingCartItem, " ASDASD");
+
+    if (existingCartItem) {
+      return cartReducer(prevCartState, {
+        type: "INCREMENT_QUANTITY",
+        payload: existingCartItem.id,
+      });
+    } else {
+      return [...prevCartState, { ...action.payload, quantity: 1 }];
+    }
+  }
+
+  if (action.type === "DELETE_MEAL") {
+    // TODO a popup message asking 'are you sure you want to delete this item?'
+    return prevCartState.filter(
+      (prevCartItem) => prevCartItem.id !== action.payload
+    );
+  }
+
+  if (action.type === "INCREMENT_QUANTITY") {
+    return prevCartState.map((prevCartItem) =>
+      prevCartItem.id === action.payload
+        ? { ...prevCartItem, quantity: prevCartItem.quantity + 1 }
+        : prevCartItem
+    );
+  }
+
+  if (action.type === "DECREMENT_QUANTITY") {
+    const selectedCartItem = prevCartState.find(
+      (cartItem) => cartItem.id === action.payload
+    );
+
+    if (selectedCartItem.quantity === 1) {
+      return cartReducer(prevCartState, {
+        type: "DELETE_MEAL",
+        payload: selectedCartItem.id,
+      });
+    } else {
+      return prevCartState.map((prevCartItem) =>
+        prevCartItem.id === action.payload
+          ? { ...prevCartItem, quantity: prevCartItem.quantity - 1 }
+          : prevCartItem
+      );
+    }
+  }
+
+  if ((action.type = "CLEAR_CART")) {
+    return [];
+  }
+}
 
 // ?
 // TODO in the future
 // ?FIX less re-executes of the component
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
+
+  let initialCartState = [];
+
+  // get localstorage 'cart' data and set it as initialCartState
+  function initFunction(initialCartState) {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      return JSON.parse(savedCart);
+    } else return initialCartState;
+  }
+
+  const [cart, cartDispatch] = useReducer(
+    cartReducer,
+    initialCartState,
+    initFunction
+  );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // get localstorage 'cart' data and update cart state
-  useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-  }, []);
+  // TODO put the useReducer code / functions (below) under other functions
+  function addMeal(id, name, price) {
+    cartDispatch({
+      type: "ADD_MEAL",
+      payload: { id, name, price },
+    });
+  }
+
+  function deleteMeal(id) {
+    cartDispatch({
+      type: "DELETE_MEAL",
+      payload: id,
+    });
+  }
+
+  function incrementMealQuantity(id) {
+    cartDispatch({
+      type: "INCREMENT_QUANTITY",
+      payload: id,
+    });
+  }
+
+  function decrementMealQuantity(id) {
+    cartDispatch({
+      type: "DECREMENT_QUANTITY",
+      payload: id,
+    });
+  }
+
+  function clearCart() {
+    cartDispatch({
+      type: "CLEAR_CART",
+    });
+  }
 
   console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart);
 
+  // ?
+  // ?TODO add to a different file so it doesnt clutter this one so much, custom hook?
   // fetch availableMeals data from the backend
   useEffect(() => {
     async function loadAvailableMeals() {
@@ -52,28 +154,6 @@ export function MealsContextProvider({ children }) {
     loadAvailableMeals();
   }, []);
 
-  // * thats a 99% awesome idea, gtg rn
-  // ^ useReducer having a "ADDMEAL", "DELETEMEAL", "PLUSQUANTITY", "MINUSQUANTITY" stuff, something like that
-  // ? refactor to useReducer? - check Modal.jsx, comment @ line 29
-  function addMealToCart(id, name, price) {
-    // ? add this filtering method to different function?
-    // ^ maybe util/validation.js? - must be created first!
-
-    setCart((prevCart) => {
-      const existingCartItem = prevCart.find((item) => item.id === id);
-
-      if (existingCartItem) {
-        return prevCart.map((prevCartItem) =>
-          prevCartItem.id === id
-            ? { ...prevCartItem, quantity: prevCartItem.quantity + 1 }
-            : prevCartItem
-        );
-      } else {
-        return [...prevCart, { id, name, price, quantity: 1 }];
-      }
-    });
-  }
-
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -81,7 +161,7 @@ export function MealsContextProvider({ children }) {
   // DEBUGGING
   function debugResetLocalstorage() {
     localStorage.clear();
-    setCart([]);
+    clearCart();
   }
 
   function handleOpenModal() {
@@ -96,9 +176,12 @@ export function MealsContextProvider({ children }) {
 
   const mealsValue = {
     availableMeals,
-    // ? do we need to expose the whole `cart` state?
     cart,
-    addMealToCart,
+    clearCart,
+    addMeal,
+    deleteMeal,
+    incrementMealQuantity,
+    decrementMealQuantity,
     debugResetLocalstorage, // DEBUGGING
     isModalOpen,
     handleOpenModal,
