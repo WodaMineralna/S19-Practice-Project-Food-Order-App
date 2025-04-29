@@ -13,6 +13,8 @@ export const MealsContext = createContext({
   handleOpenModal: () => {},
   handleCloseModal: () => {},
   isFetchingMeals: false,
+  changeModalPage: (number) => {},
+  modalPageToShow: 1,
 });
 
 // ?
@@ -80,6 +82,7 @@ export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFetchingMeals, setIsFetchingMeals] = useState(false);
+  const [modalPageToShow, setModalPageToShow] = useState(1); // 1 - cart, 2 - form, 3 - post-form
 
   let initialCartState = [];
 
@@ -187,6 +190,10 @@ export function MealsContextProvider({ children }) {
     setIsModalOpen(false);
   }
 
+  function changeModalPage(number) {
+    setModalPageToShow(number)
+  }
+
   const mealsValue = {
     availableMeals,
     cart,
@@ -200,6 +207,9 @@ export function MealsContextProvider({ children }) {
     handleOpenModal,
     handleCloseModal,
     isFetchingMeals,
+    // ? name should be changed?
+    changeModalPage,
+    modalPageToShow,
   };
 
   return (

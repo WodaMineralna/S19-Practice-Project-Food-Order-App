@@ -1,4 +1,6 @@
-import { useActionState } from "react";
+import { useActionState, use } from "react";
+
+import { MealsContext } from "../store/meals-context";
 
 import InputField from "./InputField";
 
@@ -18,6 +20,8 @@ const ERROR_MESSAGES = {
 };
 
 export default function ModalForm() {
+  const { changeModalPage } = use(MealsContext)
+
   function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
     const email = formData.get("email");
@@ -55,6 +59,7 @@ export default function ModalForm() {
 
     // TODO fetch data
     // * Data fetching will be right there - to be implemented
+    // ! After the data is succesfully fetched, execute changeModalPage(3)
 
     return { errors: null };
   }
@@ -108,7 +113,7 @@ export default function ModalForm() {
         />
       </div>
       <div className="formButtons">
-        <button type="button">Reset</button>
+        <button onClick={() => changeModalPage(1)}>Go back</button>
         <button type="submit">Submit Order</button>
       </div>
       {formState.errors && (

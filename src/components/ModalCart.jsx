@@ -4,7 +4,7 @@ import { MealsContext } from "../store/meals-context";
 import TrashIcon from "../assets/icons/TrashIcon";
 
 export default function ModalCart() {
-  const { cart, deleteMeal, incrementMealQuantity, decrementMealQuantity } =
+  const { cart, deleteMeal, incrementMealQuantity, decrementMealQuantity, changeModalPage } =
     use(MealsContext);
 
   const totalCartPrice = cart.reduce(
@@ -43,6 +43,7 @@ export default function ModalCart() {
           ? "Your cart is empty!"
           : `Your total price: $${totalCartPrice.toFixed(2)}`}
       </p>
+      <button onClick={() => changeModalPage(2)}>Go to checkout</button>
     </ul>
   );
 }
