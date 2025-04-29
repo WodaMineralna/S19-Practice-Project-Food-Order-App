@@ -19,8 +19,8 @@ export default function Modal() {
         <button className="modal-close" onClick={handleCloseModal}>
           ×
         </button>
-        {/* <ModalCart /> */}
-        <ModalForm />
+        <ModalCart />
+        {/* <ModalForm /> */}
       </div>
     </div>,
     document.getElementById("modal")

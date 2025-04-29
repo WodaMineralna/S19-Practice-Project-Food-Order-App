@@ -32,16 +32,17 @@ export default function ModalCart() {
               className="modal-listItem-button"
               onClick={() => decrementMealQuantity(cartItem.id)}
             >
-              {" "}
               -
             </button>
           </div>
         </li>
       ))}
       {/* // TODO add CSS styling */}
-      {cart.length === 0
-        ? "Your cart is empty!"
-        : `Your total price: $${totalCartPrice.toFixed(2)}`}
+      <p>
+        {cart.length === 0
+          ? "Your cart is empty!"
+          : `Your total price: $${totalCartPrice.toFixed(2)}`}
+      </p>
     </ul>
   );
 }
