@@ -1,9 +1,9 @@
 import { use } from "react";
 
-import { MealsContext } from "../store/meals-context";
+import { CartContext } from "../../store/cart-context";
 
 export default function ModalPostForm() {
-  const { totalCartPrice, submittedOrder } = use(MealsContext);
+  const { totalCartPrice, submittedOrder } = use(CartContext);
   return (
     <>
       <h3>Success!</h3>

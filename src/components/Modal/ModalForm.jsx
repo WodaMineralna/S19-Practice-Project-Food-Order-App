@@ -1,6 +1,7 @@
 import { useActionState, use } from "react";
 
-import { MealsContext } from "../store/meals-context";
+import { CartContext } from "../../store/cart-context";
+import { ModalContext } from "../../store/modal-context";
 
 import InputField from "./InputField";
 
@@ -9,7 +10,7 @@ import {
   isEmailAdress,
   isLongEnough,
   isPostalCodeValid,
-} from "../util/validation";
+} from "../../util/validation";
 
 const ERROR_MESSAGES = {
   fullName: "Please enter your Full Name.",
@@ -19,8 +20,9 @@ const ERROR_MESSAGES = {
   city: "Please enter a city.",
 };
 
-export default function ModalForm() {
-  const { changeModalPage, submitOrder } = use(MealsContext);
+export default function ModalchangeModalPageForm() {
+  const { submitOrder } = use(CartContext);
+  const { changeModalPage } = use(ModalContext);
 
   async function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
@@ -68,6 +70,9 @@ export default function ModalForm() {
       postalCode,
       city,
     });
+
+    // ^ might cause problems, didnt test
+    changeModalPage(3);
 
     return { errors: null };
   }

@@ -11,10 +11,13 @@ export default function Meals() {
   //   availableMeals
   // ); // DEBUG
 
-  // ? why do i have to '!' it?
-  return !isFetchingMeals ? (
-    <p className="fetching">Fetching available meals, please wait... </p>
-  ) : (
+  if (isFetchingMeals) {
+    return (
+      <p className="fetching">Fetching available meals, please wait... </p>
+    );
+  }
+
+  return (
     <ul className="meals-list">
       {availableMeals.map((meal) => (
         <li className="mealItem" key={meal.id}>

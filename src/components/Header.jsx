@@ -1,11 +1,13 @@
 import { use } from "react";
 
-import { MealsContext } from "../store/meals-context";
+import { CartContext } from "../store/cart-context";
+import { ModalContext } from "../store/modal-context";
 
 import imgSrc from "../assets/logo.jpg";
 
 export default function Header() {
-  const { cart, clearCart, debugResetLocalstorage, handleOpenModal } = use(MealsContext);
+  const { cart, debugResetLocalstorage } = use(CartContext);
+  const { handleOpenModal } = use(ModalContext);
 
   return (
     <header>

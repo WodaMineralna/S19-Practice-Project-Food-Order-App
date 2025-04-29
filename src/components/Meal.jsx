@@ -1,9 +1,9 @@
 import { use } from "react";
 
-import { MealsContext } from "../store/meals-context";
+import { CartContext } from "../store/cart-context";
 
 export default function Meal({ id, name, price, description, imgPath }) {
-  const { addMeal } = use(MealsContext);
+  const { addMeal } = use(CartContext);
 
   return (
     <>
