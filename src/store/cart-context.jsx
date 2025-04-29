@@ -92,9 +92,6 @@ export function CartContextProvider({ children }) {
 
   console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart); // DEBUG
 
-  // TODO put it elsewere, above other functions
-  // ? or maybe in a different file (custom hook?)
-  // ? --V
   // TODO better error handling (using some state?)
   // submitting customers order to the backend
   async function submitOrder(customer) {
