@@ -10,6 +10,9 @@ export const MealsContext = createContext({
   decrementMealQuantity: (id) => {},
   debugResetLocalstorage: () => {}, // DEBUGGING
   isModalOpen: false,
+  handleOpenModal: () => {},
+  handleCloseModal: () => {},
+  isFetchingMeals: false,
 });
 
 // ?
@@ -76,6 +79,7 @@ export function cartReducer(prevCartState, action) {
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFetchingMeals, setIsFetchingMeals] = useState(false);
 
   let initialCartState = [];
 
@@ -138,6 +142,7 @@ export function MealsContextProvider({ children }) {
   // fetch availableMeals data from the backend
   useEffect(() => {
     async function loadAvailableMeals() {
+      setIsFetchingMeals(true);
       try {
         // ! USE 192.168.1.31 intead of 'localhost', beacuse data wont fetch on PC otherwise
         const response = await fetch("http://192.168.1.31:3000/meals");
@@ -154,6 +159,7 @@ export function MealsContextProvider({ children }) {
         console.error(
           "Could not fetch available meals, please try again later."
         );
+        setIsFetchingMeals(false);
       }
     }
 
@@ -193,6 +199,7 @@ export function MealsContextProvider({ children }) {
     isModalOpen,
     handleOpenModal,
     handleCloseModal,
+    isFetchingMeals,
   };
 
   return (

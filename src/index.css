@@ -39,6 +39,10 @@ header p {
   margin-left: auto;
 }
 
+.fetching {
+  margin: 25px;
+}
+
 .meals-list {
   list-style: none;
   padding: 0;
