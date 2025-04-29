@@ -4,13 +4,14 @@ import { MealsContext } from "../store/meals-context";
 import TrashIcon from "../assets/icons/TrashIcon";
 
 export default function ModalCart() {
-  const { cart, deleteMeal, incrementMealQuantity, decrementMealQuantity, changeModalPage } =
-    use(MealsContext);
-
-  const totalCartPrice = cart.reduce(
-    (totalPrice, cartItem) => totalPrice + cartItem.price * cartItem.quantity,
-    0
-  );
+  const {
+    cart,
+    totalCartPrice,
+    deleteMeal,
+    incrementMealQuantity,
+    decrementMealQuantity,
+    changeModalPage,
+  } = use(MealsContext);
 
   return (
     <ul className="modal-list">
@@ -41,7 +42,7 @@ export default function ModalCart() {
       <p>
         {cart.length === 0
           ? "Your cart is empty!"
-          : `Your total price: $${totalCartPrice.toFixed(2)}`}
+          : `Your total price: ${totalCartPrice}`}
       </p>
       <button onClick={() => changeModalPage(2)}>Go to checkout</button>
     </ul>

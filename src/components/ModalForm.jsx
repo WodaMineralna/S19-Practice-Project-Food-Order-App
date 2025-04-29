@@ -20,9 +20,9 @@ const ERROR_MESSAGES = {
 };
 
 export default function ModalForm() {
-  const { changeModalPage } = use(MealsContext)
+  const { changeModalPage, submitOrder } = use(MealsContext);
 
-  function submitOrderAction(prevFormState, formData) {
+  async function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
     const email = formData.get("email");
     const street = formData.get("street");
@@ -61,11 +61,29 @@ export default function ModalForm() {
     // * Data fetching will be right there - to be implemented
     // ! After the data is succesfully fetched, execute changeModalPage(3)
 
+    await submitOrder({
+      fullName,
+      email,
+      street,
+      postalCode,
+      city,
+    });
+
     return { errors: null };
   }
 
   const [formState, formAction, pending] = useActionState(submitOrderAction, {
     errors: null,
+    // DEBUG random values
+    enteredValues: {
+      fullName: `John Doe, ${Math.random().toString(36).substring(2, 8)}`,
+      email: `user${Math.random().toString(36).substring(2, 5)}@example.com`,
+      street: `${Math.floor(Math.random() * 1000)} Random St`,
+      postalCode: `${Math.floor(10 + Math.random() * 90)}-${Math.floor(
+        100 + Math.random() * 900
+      )}`,
+      city: `City-${Math.random().toString(36).substring(2, 6)}`,
+    },
   });
 
   return (
@@ -113,8 +131,12 @@ export default function ModalForm() {
         />
       </div>
       <div className="formButtons">
-        <button onClick={() => changeModalPage(1)}>Go back</button>
-        <button type="submit">Submit Order</button>
+        <button onClick={() => changeModalPage(1)} disabled={pending}>
+          Go back
+        </button>
+        <button type="submit" disabled={pending}>
+          {pending ? "Submitting your order..." : "Submit Order"}
+        </button>
       </div>
       {formState.errors && (
         <ul className="form-errors">

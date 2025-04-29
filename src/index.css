@@ -95,7 +95,8 @@ header p {
   animation-duration: 1s;
 }
 
-/* ?TODO / CHANGE change model classnames / the amount of them etc */
+/* ?TODO / CHANGE change modal classnames / the amount of them etc */
+/* * prob change the name matching the modal state (eg.: .cart-listItem, not .modal-listItem) */
 
 .modal-listItem {
   display: flex;
@@ -150,6 +151,14 @@ header p {
 .form-errors {
   color: #c46111;
   font-weight: bold;
+}
+
+.postForm-listItem {
+  margin: 20px;
+}
+
+.postForm-pricePerPiece {
+  margin: 0px 0px 5px;
 }
 
 /* for modal */

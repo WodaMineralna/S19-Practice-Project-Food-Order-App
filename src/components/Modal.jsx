@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { MealsContext } from "../store/meals-context";
 import ModalCart from "./ModalCart";
 import ModalForm from "./ModalForm";
+import ModalPostForm from "./ModalPostForm";
 
 const MODAL_PAGES = {
   CART: 1,
@@ -21,9 +22,8 @@ export default function Modal() {
   if (modalPageToShow === MODAL_PAGES.CART) modalContent = <ModalCart />;
   if (modalPageToShow === MODAL_PAGES.FORM) modalContent = <ModalForm />;
 
-  // TODO add post-form modal
   // ? change name?
-  // if(modalPageToShow === MODAL_PAGES.POST_FORM) modalContent = <ModalPostForm />
+  if(modalPageToShow === MODAL_PAGES.POST_FORM) modalContent = <ModalPostForm />
 
   return createPortal(
     <div className="modal-overlay" onClick={handleCloseModal}>

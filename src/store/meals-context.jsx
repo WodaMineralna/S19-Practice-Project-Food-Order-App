@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useReducer } from "react";
 export const MealsContext = createContext({
   availableMeals: [],
   cart: [],
+  totalCartPrice: 0,
   clearCart: () => {},
   addMeal: (meal) => {},
   deleteMeal: (id) => {},
@@ -15,6 +16,8 @@ export const MealsContext = createContext({
   isFetchingMeals: false,
   changeModalPage: (number) => {},
   modalPageToShow: 1,
+  submitOrder: (order) => {},
+  submittedOrder: {},
 });
 
 // ?
@@ -83,6 +86,7 @@ export function MealsContextProvider({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFetchingMeals, setIsFetchingMeals] = useState(false);
   const [modalPageToShow, setModalPageToShow] = useState(1); // 1 - cart, 2 - form, 3 - post-form
+  const [submittedOrder, setSubmittedOrder] = useState(null);
 
   let initialCartState = [];
 
@@ -99,6 +103,16 @@ export function MealsContextProvider({ children }) {
     initialCartState,
     initCartFunction
   );
+
+  const totalCartPrice =
+    "$" +
+    cart
+      .reduce(
+        (totalPrice, cartItem) =>
+          totalPrice + cartItem.price * cartItem.quantity,
+        0
+      )
+      .toFixed(2);
 
   function addMeal(id, name, price) {
     cartDispatch({
@@ -139,8 +153,6 @@ export function MealsContextProvider({ children }) {
   // ?
   // ?TODO add to a different file so it doesnt clutter this one so much, custom hook?
   // !
-  // TODO show a notification to the user, while the data is being fetched
-  // ^ through a 'isFetching' state - the TRIO
   // ^ also add a error state, availableMeals is already implemented (one of the three data fetching common states)
   // fetch availableMeals data from the backend
   useEffect(() => {
@@ -191,12 +203,46 @@ export function MealsContextProvider({ children }) {
   }
 
   function changeModalPage(number) {
-    setModalPageToShow(number)
+    setModalPageToShow(number);
+  }
+
+  // TODO put it elsewere, above other functions
+  // ? or maybe in a different file (custom hook?)
+  // ? --V
+  // TODO better error handling (using some state?)
+  // submitting customers order to the backend
+  async function submitOrder(customer) {
+    const newOrder = { customer, items: cart };
+
+    try {
+      const response = await fetch("http://192.168.1.31:3000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newOrder),
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const orderData = await response.json();
+
+      console.log("SUBMITTED ORDER: ", orderData); // DEBUG
+      setSubmittedOrder(orderData);
+      changeModalPage(3);
+
+      return submittedOrder;
+    } catch {
+      console.error("Failed to submit order:", error.message);
+    }
   }
 
   const mealsValue = {
     availableMeals,
     cart,
+    totalCartPrice,
     clearCart,
     addMeal,
     deleteMeal,
@@ -210,6 +256,8 @@ export function MealsContextProvider({ children }) {
     // ? name should be changed?
     changeModalPage,
     modalPageToShow,
+    submitOrder,
+    submittedOrder,
   };
 
   return (
