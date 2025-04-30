@@ -127,6 +127,18 @@ header p {
   cursor: pointer;
 }
 
+.modal-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(194, 59, 59);
+}
+
+.modal-error p {
+  font-weight: bold;
+}
+
+
 .form-inputFields {
   display: flex;
   flex-direction: column;

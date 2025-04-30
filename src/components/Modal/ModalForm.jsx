@@ -22,7 +22,7 @@ const ERROR_MESSAGES = {
 
 export default function ModalchangeModalPageForm() {
   const { submitOrder } = use(CartContext);
-  const { changeModalPage } = use(ModalContext);
+  const { changeModalPage, setErrorMessage } = use(ModalContext);
 
   async function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
@@ -59,17 +59,20 @@ export default function ModalchangeModalPageForm() {
       };
     }
 
-    // TODO fetch data
-    // * Data fetching will be right there - to be implemented
-    // ! After the data is succesfully fetched, execute changeModalPage(3)
-
-    await submitOrder({
+    const errorMsg = await submitOrder({
       fullName,
       email,
       street,
       postalCode,
       city,
     });
+
+    if (errorMsg) {
+      console.error("Error submitting order: ", errorMsg);
+      changeModalPage(4);
+      setErrorMessage(errorMsg);
+      return { errors: [errorMsg] };
+    }
 
     // ^ might cause problems, didnt test
     changeModalPage(3);

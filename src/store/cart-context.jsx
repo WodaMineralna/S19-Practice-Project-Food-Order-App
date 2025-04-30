@@ -34,6 +34,8 @@ export function CartContextProvider({ children }) {
     initCartFunction
   );
 
+  // ?
+  // ?FIX check if it's not re-executed too many times for no reason
   const totalCartPrice =
     "$" +
     cart
@@ -93,7 +95,6 @@ export function CartContextProvider({ children }) {
 
   console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart); // DEBUG
 
-  // TODO better error handling (using some state?)
   // submitting customers order to the backend
   async function submitOrder(customer) {
     const newOrder = { customer, items: cart };
@@ -108,16 +109,19 @@ export function CartContextProvider({ children }) {
       });
 
       if (!response.ok) {
-        return;
+        const errorData = await response.json();
+        console.error("Failed to submit order: ", errorData.message);
+        return errorData.message || "Failed to submit order.";
       }
 
       const orderData = await response.json();
 
       console.log("SUBMITTED ORDER: ", orderData); // DEBUG
-      setSubmittedOrder(orderData);
-      clearCart(initialCartState)
+      setSubmittedOrder({...orderData, totalCartPrice});
+      clearCart(initialCartState);
     } catch (error) {
       console.error("Failed to submit order:", error.message);
+      return error.message || "An unexpected error has occured.";
     }
   }
 

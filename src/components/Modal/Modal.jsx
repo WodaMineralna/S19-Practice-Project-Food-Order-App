@@ -3,16 +3,18 @@ import { createPortal } from "react-dom";
 
 import { ModalContext } from "../../store/modal-context";
 
-import { ModalCart, ModalForm, ModalPostForm } from ".";
+import { ModalCart, ModalForm, ModalPostForm, ModalError } from ".";
 
 const MODAL_PAGES = {
   CART: 1,
   FORM: 2,
   POST_FORM: 3,
+  ERROR_PAGE: 4,
 };
 
 export default function Modal() {
-  const { isModalOpen, handleCloseModal, modalPageToShow } = use(ModalContext);
+  const { isModalOpen, handleCloseModal, modalPageToShow, modalErrorMessage } =
+    use(ModalContext);
 
   if (!isModalOpen) return null;
 
@@ -22,6 +24,8 @@ export default function Modal() {
   if (modalPageToShow === MODAL_PAGES.FORM) modalContent = <ModalForm />;
   if (modalPageToShow === MODAL_PAGES.POST_FORM)
     modalContent = <ModalPostForm />;
+  if (modalPageToShow === MODAL_PAGES.ERROR_PAGE)
+    modalContent = <ModalError message={modalErrorMessage} />;
 
   return createPortal(
     <div className="modal-overlay" onClick={handleCloseModal}>

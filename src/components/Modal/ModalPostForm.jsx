@@ -3,7 +3,7 @@ import { use } from "react";
 import { CartContext } from "../../store/cart-context";
 
 export default function ModalPostForm() {
-  const { totalCartPrice, submittedOrder } = use(CartContext);
+  const { submittedOrder } = use(CartContext);
   return (
     <>
       <h3>Success!</h3>
@@ -37,7 +37,7 @@ export default function ModalPostForm() {
         ))}
       </ul>
 
-      <h4>Total: {totalCartPrice}</h4>
+      <h4>{`Total: ${submittedOrder.totalCartPrice}`}</h4>
     </>
   );
 }
