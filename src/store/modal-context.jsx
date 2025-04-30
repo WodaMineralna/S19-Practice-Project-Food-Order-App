@@ -6,14 +6,14 @@ export const ModalContext = createContext({
   handleCloseModal: () => {},
   changeModalPage: (number) => {},
   modalPageToShow: 1,
-  modalErrorMessage: null,
+  ErrorMessageMessage: null,
   setErrorMessage: (errorMsg) => {},
 });
 
 export function ModalContextProvider({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPageToShow, setModalPageToShow] = useState(1); // 1 - cart, 2 - form, 3 - post-form, 4 - error-page
-  const [modalErrorMessage, setModalErrorMessage] = useState(null);
+  const [ErrorMessageMessage, setErrorMessageMessage] = useState(null);
 
   function handleOpenModal() {
     console.log("Modal opened");
@@ -31,7 +31,7 @@ export function ModalContextProvider({ children }) {
   }
 
   function setErrorMessage(errorMsg) {
-    setModalErrorMessage(errorMsg);
+    setErrorMessageMessage(errorMsg);
   }
 
   const modalValue = {
@@ -40,7 +40,7 @@ export function ModalContextProvider({ children }) {
     handleCloseModal,
     changeModalPage,
     modalPageToShow,
-    modalErrorMessage,
+    ErrorMessageMessage,
     setErrorMessage,
   };
 

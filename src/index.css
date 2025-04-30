@@ -120,15 +120,19 @@ header p {
   cursor: pointer;
 }
 
-.modal-error {
+.error-message {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: rgb(194, 59, 59);
 }
 
-.modal-error p {
+.error-message p {
   font-weight: bold;
+}
+
+.error-message strong {
+  color: #d7b719;
 }
 
 .form-inputFields {

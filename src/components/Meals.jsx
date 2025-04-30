@@ -3,8 +3,11 @@ import { MealsContext } from "../store/meals-context";
 
 import Meal from "./Meal";
 
+import ErrorMessage from "./ErrorMessage";
+
 export default function Meals() {
-  const { availableMeals, isFetchingMeals } = use(MealsContext);
+  const { availableMeals, isFetchingMeals, mealsErrorMessage } =
+    use(MealsContext);
 
   // console.log(
   //   `Type: ${typeof availableMeals}, 🔥Fetched availableMeals: `,
@@ -15,6 +18,10 @@ export default function Meals() {
     return (
       <p className="fetching">Fetching available meals, please wait... </p>
     );
+  }
+
+  if (mealsErrorMessage) {
+    return <ErrorMessage message={mealsErrorMessage} />;
   }
 
   return (
