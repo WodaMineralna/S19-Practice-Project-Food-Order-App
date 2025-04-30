@@ -39,7 +39,6 @@ export default function ModalCart() {
           </div>
         </li>
       ))}
-      {/* // TODO add CSS styling */}
       <p>
         {cart.length === 0
           ? "Your cart is empty!"

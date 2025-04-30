@@ -6,24 +6,18 @@ import { ModalContext } from "../store/modal-context";
 import imgSrc from "../assets/logo.jpg";
 
 export default function Header() {
-  const { cart, debugResetLocalstorage } = use(CartContext);
+  const { cart, resetCart } = use(CartContext);
   const { handleOpenModal } = use(ModalContext);
 
   return (
     <header>
       <img src={imgSrc} alt="Logo image" />
-      <p>REACTFOOD</p>
-
-      {/* // TODO - cart data fetching functionality, showing a Modal */}
-      {/* // ? in this file? */}
-      {/* // * Context will be needed */}
+      <h3>REACTFOOD</h3>
       <button className="cart-button" onClick={handleOpenModal}>
         Cart ({cart.length})
       </button>
-      <button className="cart-button" onClick={debugResetLocalstorage}>
-        Clear cart (isLocalStorage? -{" "}
-        {/* // FIX it shows 'Yes' after page reload, even if it's empty */}
-        {localStorage.getItem("cart")?.length > 0 ? "Yes" : "No"})
+      <button className="cart-button" onClick={resetCart}>
+        Clear cart
       </button>
     </header>
   );

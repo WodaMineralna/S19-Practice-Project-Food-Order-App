@@ -5,8 +5,6 @@ export const MealsContext = createContext({
   isFetchingMeals: false,
 });
 
-// ?
-// TODO in the future
 // ?FIX less re-executes of the component
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
@@ -32,7 +30,8 @@ export function MealsContextProvider({ children }) {
         // TODO add better error handling
         // ? Maybe <ErrorPage> component?
         console.error(
-          "Could not fetch available meals, please try again later."
+          error.message ||
+            "Could not fetch available meals, please try again later."
         );
       }
       setIsFetchingMeals(false);

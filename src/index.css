@@ -14,9 +14,6 @@ body {
   min-height: 100vh;
 }
 
-/* TODO - styling for everything */
-/* ! DUMMY STYLING WILL BE CREATED, BEFORE ALL OF THE FUNCTIONALITY IS CREATED */
-
 header {
   width: 100vw;
   padding: 25px;
@@ -95,9 +92,6 @@ header p {
   animation-duration: 1s;
 }
 
-/* ?TODO / CHANGE change modal classnames / the amount of them etc */
-/* * prob change the name matching the modal state (eg.: .cart-listItem, not .modal-listItem) */
-
 .modal-listItem {
   display: flex;
   flex-direction: row;
@@ -109,7 +103,6 @@ header p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */ /* ? needed? */
 }
 
 .modal-listItem-button {
@@ -138,7 +131,6 @@ header p {
   font-weight: bold;
 }
 
-
 .form-inputFields {
   display: flex;
   flex-direction: column;
@@ -146,7 +138,7 @@ header p {
   margin-bottom: 40px;
 }
 
-/* FIX some of the styles are probably useless */
+/* FIX - some of the styles are probably useless */
 .form-item {
   display: flex;
   flex-direction: row;

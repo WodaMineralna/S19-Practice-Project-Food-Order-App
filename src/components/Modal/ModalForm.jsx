@@ -74,7 +74,6 @@ export default function ModalchangeModalPageForm() {
       return { errors: [errorMsg] };
     }
 
-    // ^ might cause problems, didnt test
     changeModalPage(3);
 
     return { errors: null };

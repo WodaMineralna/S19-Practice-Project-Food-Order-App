@@ -10,7 +10,7 @@ export const CartContext = createContext({
   deleteMeal: (id) => {},
   incrementMealQuantity: (id) => {},
   decrementMealQuantity: (id) => {},
-  debugResetLocalstorage: () => {}, // DEBUGGING
+  resetCart: () => {},
   submitOrder: (order) => {},
   submittedOrder: {},
 });
@@ -86,9 +86,7 @@ export function CartContextProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // DEBUGGING
-  function debugResetLocalstorage() {
-    console.log("🔥TEST 🔥 TEST🔥");
+  function resetCart() {
     localStorage.clear();
     clearCart(initialCartState);
   }
@@ -117,7 +115,7 @@ export function CartContextProvider({ children }) {
       const orderData = await response.json();
 
       console.log("SUBMITTED ORDER: ", orderData); // DEBUG
-      setSubmittedOrder({...orderData, totalCartPrice});
+      setSubmittedOrder({ ...orderData, totalCartPrice });
       clearCart(initialCartState);
     } catch (error) {
       console.error("Failed to submit order:", error.message);
@@ -133,7 +131,7 @@ export function CartContextProvider({ children }) {
     deleteMeal,
     incrementMealQuantity,
     decrementMealQuantity,
-    debugResetLocalstorage, // DEBUGGING
+    resetCart,
     submitOrder,
     submittedOrder,
   };

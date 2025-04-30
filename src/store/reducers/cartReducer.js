@@ -15,8 +15,6 @@ export default function cartReducer(prevCartState, action) {
   }
 
   if (action.type === "DELETE_MEAL") {
-    // ?
-    // TODO a popup message asking 'are you sure you want to delete this item?'
     return prevCartState.filter(
       (prevCartItem) => prevCartItem.id !== action.payload
     );
@@ -53,5 +51,6 @@ export default function cartReducer(prevCartState, action) {
     return action.payload;
   }
 
+  // default
   return prevCartState;
 }
