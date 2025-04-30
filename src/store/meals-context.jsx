@@ -18,7 +18,7 @@ export function MealsContextProvider({ children }) {
       setIsFetchingMeals(true);
       try {
         // ! USE 192.168.1.31 intead of 'localhost', beacuse data wont fetch on PC otherwise
-        const response = await fetch("http://192.18.1.31:3000/meals");
+        const response = await fetch("http://192.168.1.31:3000/meals");
 
         if (!response.ok) {
           throw new Error("Failed to fetch meals.");

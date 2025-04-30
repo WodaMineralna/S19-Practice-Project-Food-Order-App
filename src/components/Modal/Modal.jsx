@@ -14,12 +14,8 @@ const MODAL_PAGES = {
 };
 
 export default function Modal() {
-  const {
-    isModalOpen,
-    handleCloseModal,
-    modalPageToShow,
-    ErrorMessageMessage,
-  } = use(ModalContext);
+  const { isModalOpen, handleCloseModal, modalPageToShow, modalErrorMessage } =
+    use(ModalContext);
 
   if (!isModalOpen) return null;
 
@@ -30,7 +26,7 @@ export default function Modal() {
   if (modalPageToShow === MODAL_PAGES.POST_FORM)
     modalContent = <ModalPostForm />;
   if (modalPageToShow === MODAL_PAGES.ERROR_PAGE)
-    modalContent = <ErrorMessage message={ErrorMessageMessage} />;
+    modalContent = <ErrorMessage message={modalErrorMessage} />;
 
   return createPortal(
     <div className="modal-overlay" onClick={handleCloseModal}>
