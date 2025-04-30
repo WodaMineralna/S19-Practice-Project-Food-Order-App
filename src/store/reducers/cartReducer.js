@@ -50,7 +50,7 @@ export default function cartReducer(prevCartState, action) {
   }
 
   if (action.type === "CLEAR_CART") {
-    return [];
+    return action.payload;
   }
 
   return prevCartState;

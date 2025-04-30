@@ -5,7 +5,7 @@ import cartReducer from "./reducers/cartReducer.js";
 export const CartContext = createContext({
   cart: [],
   totalCartPrice: 0,
-  clearCart: () => {},
+  clearCart: (initialCart) => {},
   addMeal: (meal) => {},
   deleteMeal: (id) => {},
   incrementMealQuantity: (id) => {},
@@ -75,6 +75,7 @@ export function CartContextProvider({ children }) {
   function clearCart() {
     cartDispatch({
       type: "CLEAR_CART",
+      payload: initialCartState,
     });
   }
 
@@ -87,7 +88,7 @@ export function CartContextProvider({ children }) {
   function debugResetLocalstorage() {
     console.log("🔥TEST 🔥 TEST🔥");
     localStorage.clear();
-    clearCart();
+    clearCart(initialCartState);
   }
 
   console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart); // DEBUG
@@ -114,6 +115,7 @@ export function CartContextProvider({ children }) {
 
       console.log("SUBMITTED ORDER: ", orderData); // DEBUG
       setSubmittedOrder(orderData);
+      clearCart(initialCartState)
     } catch (error) {
       console.error("Failed to submit order:", error.message);
     }
