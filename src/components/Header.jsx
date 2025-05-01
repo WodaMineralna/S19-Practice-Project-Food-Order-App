@@ -19,6 +19,8 @@ export default function Header() {
         Cart ({cart.length})
       </button>
       {/* // DEBUGGING - hidden for now, will be moved to ModalCart */}
+      {/* // TODO - move the 'Clear cart' button to ModalCart.jsx */}
+      {/* // * with a confirmation, preventing accidental taps */}
       <button className="header-hidden" onClick={resetCart}>
         Clear cart
       </button>
