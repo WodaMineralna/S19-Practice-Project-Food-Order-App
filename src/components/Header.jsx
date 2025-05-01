@@ -11,12 +11,15 @@ export default function Header() {
 
   return (
     <header>
-      <img src={imgSrc} alt="Logo image" />
-      <h3>REACTFOOD</h3>
-      <button className="cart-button" onClick={handleOpenModal}>
+      <div className="header-subContainer">
+        <img src={imgSrc} alt="Logo image" />
+        <h3 className="header-title">REACTFOOD</h3>
+      </div>
+      <button className="header-button" onClick={handleOpenModal}>
         Cart ({cart.length})
       </button>
-      <button className="cart-button" onClick={resetCart}>
+      {/* // DEBUGGING - hidden for now, will be moved to ModalCart */}
+      <button className="header-hidden" onClick={resetCart}>
         Clear cart
       </button>
     </header>

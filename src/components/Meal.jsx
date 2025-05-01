@@ -7,11 +7,22 @@ export default function Meal({ id, name, price, description, imgPath }) {
 
   return (
     <>
-      <img src={`http://192.168.1.31:3000/${imgPath}`} alt={name} />
-      <h3>{name}</h3>
-      <span>${price}</span>
-      <p>{description}</p>
-      <button onClick={() => addMeal(id, name, price)}>Add to Cart</button>
+      <img
+        src={`http://192.168.1.31:3000/${imgPath}`}
+        alt={name}
+        className="mealItem-image"
+      />
+      <div className="mealItem-subContainer">
+        <h2 className="mealItem-name">{name}</h2>
+        <strong className="mealItem-price">${price}</strong>
+        <p className="mealItem-description">{description}</p>
+        <button
+          onClick={() => addMeal(id, name, price)}
+          className="mealItem-button"
+        >
+          Add to Cart
+        </button>
+      </div>
     </>
   );
 }
