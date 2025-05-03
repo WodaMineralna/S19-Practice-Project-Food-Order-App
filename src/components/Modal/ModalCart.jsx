@@ -25,16 +25,16 @@ export default function ModalCart() {
           <div className="modal-listItem-buttonsParent">
             <button
               className="modal-listItem-button"
-              onClick={() => incrementMealQuantity(cartItem.id)}
+              onClick={() => decrementMealQuantity(cartItem.id)}
             >
-              +
+              -
             </button>
             {cartItem.quantity}
             <button
               className="modal-listItem-button"
-              onClick={() => decrementMealQuantity(cartItem.id)}
+              onClick={() => incrementMealQuantity(cartItem.id)}
             >
-              -
+              +
             </button>
           </div>
         </li>
