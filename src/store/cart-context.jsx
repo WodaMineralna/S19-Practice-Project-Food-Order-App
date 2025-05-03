@@ -13,10 +13,12 @@ export const CartContext = createContext({
   resetCart: () => {},
   submitOrder: (order) => {},
   submittedOrder: {},
+  mealWasSelected: "",
 });
 
 export function CartContextProvider({ children }) {
   const [submittedOrder, setSubmittedOrder] = useState(null);
+  const [mealWasSelected, setMealWasSelected] = useState("");
 
   let initialCartState = [];
 
@@ -51,6 +53,11 @@ export function CartContextProvider({ children }) {
       type: "ADD_MEAL",
       payload: { id, name, price },
     });
+
+    // ?
+    // ?FIX - might cause problems with re-renders?? CHECK
+    setMealWasSelected("");
+    setTimeout(() => {setMealWasSelected(id)}, 0)
   }
 
   function deleteMeal(id) {
@@ -134,6 +141,7 @@ export function CartContextProvider({ children }) {
     resetCart,
     submitOrder,
     submittedOrder,
+    mealWasSelected,
   };
 
   return (

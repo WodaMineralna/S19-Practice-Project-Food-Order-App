@@ -3,7 +3,7 @@ import { use } from "react";
 import { CartContext } from "../store/cart-context";
 
 export default function Meal({ id, name, price, description, imgPath }) {
-  const { addMeal } = use(CartContext);
+  const { addMeal, mealWasSelected } = use(CartContext);
 
   return (
     <>
@@ -17,8 +17,10 @@ export default function Meal({ id, name, price, description, imgPath }) {
         <strong className="mealItem-price">${price}</strong>
         <p className="mealItem-description">{description}</p>
         <button
+          className={`mealItem-button ${
+            mealWasSelected === id ? "mealWasSelected" : ""
+          }`}
           onClick={() => addMeal(id, name, price)}
-          className="mealItem-button"
         >
           Add to Cart
         </button>
