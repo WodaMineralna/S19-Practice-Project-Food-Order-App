@@ -16,36 +16,43 @@ export default function ModalCart() {
 
   return (
     <ul className="modal-list">
+      <h2 className="modal-listTitle">Your Cart</h2>
       {cart.map((cartItem) => (
         <li className="modal-listItem" key={cartItem.id}>
-          <button onClick={() => deleteMeal(cartItem.id)}>
+          <button
+            className="modal-listItem-trashIconButton"
+            onClick={() => deleteMeal(cartItem.id)}
+          >
             <TrashIcon />
           </button>
-          <p>{`${cartItem.name} - ${cartItem.quantity} X $${cartItem.price}`}</p>
-          <div className="modal-listItem-buttonsParent">
+          <p className="modal-listItem-mealDetails">{`${cartItem.name} - ${cartItem.quantity} X $${cartItem.price}`}</p>
+          <div className="modal-listItem-plusMinusButtonsParent">
             <button
-              className="modal-listItem-button"
+              className="modal-listItem-button symbol-minus"
               onClick={() => decrementMealQuantity(cartItem.id)}
             >
-              -
+              <span>-</span>
             </button>
-            {cartItem.quantity}
+            <span className="modal-listItem-quantity">{cartItem.quantity}</span>
             <button
               className="modal-listItem-button"
               onClick={() => incrementMealQuantity(cartItem.id)}
             >
-              +
+              <span>+</span>
             </button>
           </div>
         </li>
       ))}
-      <p>
-        {cart.length === 0
-          ? "Your cart is empty!"
-          : `Your total price: ${totalCartPrice}`}
+      <p className="modal-totalPrice">
+        {cart.length === 0 ? "Your cart is empty!" : `Total: ${totalCartPrice}`}
       </p>
       {cart.length > 0 && (
-        <button onClick={() => changeModalPage(2)}>Go to checkout</button>
+        <button
+          className="general-button modal-checkoutButton"
+          onClick={() => changeModalPage(2)}
+        >
+          Go to checkout
+        </button>
       )}
     </ul>
   );

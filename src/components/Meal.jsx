@@ -17,7 +17,7 @@ export default function Meal({ id, name, price, description, imgPath }) {
         <strong className="mealItem-price">${price}</strong>
         <p className="mealItem-description">{description}</p>
         <button
-          className={`mealItem-button ${
+          className={`general-button mealItem-button ${
             mealWasSelected === id ? "mealWasSelected" : ""
           }`}
           onClick={() => addMeal(id, name, price)}

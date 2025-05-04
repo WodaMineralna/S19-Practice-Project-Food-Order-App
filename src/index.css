@@ -64,6 +64,14 @@ header img {
   margin: 25px;
 }
 
+.general-button {
+  border: none;
+  border-radius: 5px;
+  margin-top: auto;
+  padding: 3% 5%;
+  background-color: #d7b719;
+}
+
 .meals-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -127,12 +135,7 @@ header img {
 }
 
 .mealItem-button {
-  border: none;
-  border-radius: 5px;
   width: 50%;
-  margin-top: auto;
-  padding: 3% 5%;
-  background-color: #d7b719;
 }
 
 .mealItem-name,
@@ -167,30 +170,101 @@ header img {
 }
 
 .modal-list {
-  color: #15251c;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
   list-style: none;
-  margin: none;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
+  color: #15251c;
   animation-name: fade-slide-up;
   animation-duration: 1s;
+}
+
+.modal-listTitle {
+  margin-top: 0;
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .modal-listItem {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 5%;
 }
 
-.modal-listItem-buttonsParent {
+.modal-listItem-trashIconButton {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.modal-listItem-trashIconButton:hover {
+  cursor: pointer;
+  animation: change-to-red 0.15s ease-in-out forwards;
+}
+
+.modal-listItem-mealDetails {
+  font-weight: 500;
+}
+
+.modal-listItem-plusMinusButtonsParent {
+  justify-self: stretch;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.modal-listItem-quantity {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
 }
 
 .modal-listItem-button {
+  all: unset;
   border-radius: 50%;
-  margin: 10%; /* ! probably will need fixing in the future */
+  border: none;
+  background-color: #0a0f0cbd;
+  color: #f4f4f4;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+.modal-listItem-button span {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.symbol-minus span {
+  transform: translateY(-0.5px);
+}
+
+.modal-totalPrice {
+  margin-left: auto;
+}
+
+.modal-checkoutButton {
+  margin-top: 2.5%;
+  margin-left: auto;
+  width: 40%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 .modal-close {
@@ -201,6 +275,10 @@ header img {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.modal-close:hover {
+  animation: change-to-red 0.15s forwards;
 }
 
 .error-message {
@@ -265,6 +343,7 @@ header img {
   }
 }
 
+/* after meal was added to the cart, even after additional clicks (+quantity) */
 @keyframes meal-was-selected {
   0% {
     background-color: #d7b719;
@@ -277,5 +356,11 @@ header img {
   100% {
     background-color: #d7b719;
     transform: scale(1);
+  }
+}
+
+@keyframes change-to-red {
+  100% {
+    color: rgba(237, 8, 8, 0.9);
   }
 }
