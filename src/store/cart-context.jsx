@@ -17,7 +17,6 @@ export const CartContext = createContext({
 
 export function CartContextProvider({ children }) {
   const [submittedOrder, setSubmittedOrder] = useState(null);
-  const [mealWasSelected, setMealWasSelected] = useState("");
 
   let initialCartState = [];
 
