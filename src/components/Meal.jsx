@@ -1,9 +1,17 @@
-import { use } from "react";
+import { use, useState } from "react";
 
 import { CartContext } from "../store/cart-context";
 
 export default function Meal({ id, name, price, description, imgPath }) {
-  const { addMeal, mealWasSelected } = use(CartContext);
+  const { addMeal } = use(CartContext);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  function handleAddMeal() {
+    addMeal(id, name, price);
+
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 1000);
+  }
 
   return (
     <>
@@ -18,9 +26,9 @@ export default function Meal({ id, name, price, description, imgPath }) {
         <p className="mealItem-description">{description}</p>
         <button
           className={`general-button mealItem-button ${
-            mealWasSelected === id ? "mealWasSelected" : ""
+            isAnimating ? "mealWasSelected" : ""
           }`}
-          onClick={() => addMeal(id, name, price)}
+          onClick={handleAddMeal}
         >
           Add to Cart
         </button>

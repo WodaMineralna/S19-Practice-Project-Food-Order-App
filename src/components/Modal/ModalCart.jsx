@@ -15,7 +15,7 @@ export default function ModalCart() {
   const { changeModalPage } = use(ModalContext);
 
   return (
-    <ul className="modal-list">
+    <ul className="modal-list list-animation">
       <h2 className="modal-listTitle">Your Cart</h2>
       {cart.map((cartItem) => (
         <li className="modal-listItem" key={cartItem.id}>

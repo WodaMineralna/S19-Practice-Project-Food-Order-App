@@ -174,7 +174,49 @@ header img {
   border-radius: 10px;
   position: relative;
   max-width: 600px;
+  max-height: 80vh;
   width: 100%;
+  animation-name: fade-slide-up;
+  animation-duration: 1s;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #a39891 #ffe4c4;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+  background-color: #d7b719;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #d7b719;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #ffd700;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  animation: change-to-red 0.15s forwards;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.list-animation {
   animation-name: fade-slide-up;
   animation-duration: 1s;
 }
@@ -187,8 +229,6 @@ header img {
   margin-bottom: 0;
   padding: 0;
   color: #15251c;
-  animation-name: fade-slide-up;
-  animation-duration: 1s;
 }
 
 .modal-listTitle {
@@ -267,7 +307,7 @@ header img {
 
 .modal-totalPrice {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   height: 55px;
   margin-left: auto;
   color: #15251c;
@@ -277,20 +317,6 @@ header img {
   margin-top: 2.5%;
   margin-left: auto;
   width: 40%;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.modal-close:hover {
-  animation: change-to-red 0.15s forwards;
 }
 
 .error-message {
@@ -376,12 +402,86 @@ header img {
   margin-bottom: 5px;
 }
 
-.postForm-listItem {
-  margin: 20px;
+/* Success message styles */
+.postForm-successMessage {
+  text-align: center;
+  color: #2d6a4f; /* Green for success */
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
+.postForm-subMessage {
+  text-align: center;
+  color: #495057; /* Neutral gray for subtext */
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Order details title */
+.postForm-orderDetailsTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1b4332; /* Dark green for emphasis */
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Order ID */
+.postForm-orderID {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #40916c; /* Green for the order ID */
+  margin-bottom: 1.5rem;
+}
+
+/* Ordered food list */
+.postForm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+  background-color: #f8f9fa; /* Light background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.postForm-listItem {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6; /* Subtle divider */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.postForm-listItem:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+/* Price per piece */
 .postForm-pricePerPiece {
-  margin: 0px 0px 5px;
+  font-size: 0.9rem;
+  color: #6c757d; /* Muted gray for secondary text */
+  margin: 0;
+}
+
+/* Ordered food details */
+.postForm-foodDetails {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #343a40; /* Dark text for readability */
+}
+
+/* Total price */
+.postForm-total {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1b4332; /* Dark green for emphasis */
+  margin-top: 2rem;
 }
 
 /* for modal */
