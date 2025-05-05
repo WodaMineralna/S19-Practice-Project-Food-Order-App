@@ -340,7 +340,7 @@ header img {
   outline: none;
 }
 
-.form-inputFields input:focus, .form-input-wasInvalid:focus {
+.form-inputFields input:focus {
   outline: 2px solid #4a90e2 !important;
 }
 

@@ -1,4 +1,4 @@
-import { useActionState, use } from "react";
+import { useState, useActionState, use } from "react";
 
 import { CartContext } from "../../store/cart-context";
 import { ModalContext } from "../../store/modal-context";
@@ -20,9 +20,13 @@ const ERROR_MESSAGES = {
   city: "Please enter a city.",
 };
 
-export default function ModalchangeModalPageForm() {
+export default function ModalForm() {
   const { totalCartPrice, submitOrder } = use(CartContext);
   const { changeModalPage, setErrorMessage } = use(ModalContext);
+
+  // goofy way to fix this simple unwanted behaviour xd
+  // input validation trigger - in InputField.jsx
+  const [validationTrigger, setValidationTrigger] = useState(0);
 
   async function submitOrderAction(prevFormState, formData) {
     const fullName = formData.get("fullName");
@@ -63,6 +67,7 @@ export default function ModalchangeModalPageForm() {
     console.log(errors);
 
     if (errors.length > 0) {
+      setValidationTrigger((prev) => prev + 1);
       return {
         errors,
         enteredValues: {
@@ -73,7 +78,7 @@ export default function ModalchangeModalPageForm() {
           city,
         },
         invalidInputs: Object.fromEntries(
-          invalidInputs.map((input) => [input, "true"])
+          invalidInputs.map((input) => [input, true])
         ),
       };
     }
@@ -125,6 +130,7 @@ export default function ModalchangeModalPageForm() {
           type="text"
           defaultValue={formState.enteredValues?.fullName}
           invalid={formState.invalidInputs?.fullName}
+          validationTrigger={validationTrigger}
         />
 
         <InputField
@@ -134,6 +140,7 @@ export default function ModalchangeModalPageForm() {
           type="email"
           defaultValue={formState.enteredValues?.email}
           invalid={formState.invalidInputs?.email}
+          validationTrigger={validationTrigger}
         />
 
         <InputField
@@ -143,6 +150,7 @@ export default function ModalchangeModalPageForm() {
           type="text"
           defaultValue={formState.enteredValues?.street}
           invalid={formState.invalidInputs?.street}
+          validationTrigger={validationTrigger}
         />
 
         <div className="form-inputFields lastTwo">
@@ -154,6 +162,7 @@ export default function ModalchangeModalPageForm() {
             placeholder="XX-XXX"
             defaultValue={formState.enteredValues?.postalCode}
             invalid={formState.invalidInputs?.postalCode}
+            validationTrigger={validationTrigger}
           />
 
           <InputField
@@ -163,6 +172,7 @@ export default function ModalchangeModalPageForm() {
             type="text"
             defaultValue={formState.enteredValues?.city}
             invalid={formState.invalidInputs?.city}
+            validationTrigger={validationTrigger}
           />
         </div>
       </div>
