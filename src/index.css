@@ -65,11 +65,20 @@ header img {
 }
 
 .general-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 5px;
+  height: 2rem;
   margin-top: auto;
   padding: 3% 5%;
+  text-align: center;
   background-color: #d7b719;
+  cursor: pointer;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 .meals-list {
@@ -93,7 +102,7 @@ header img {
   background-color: #0a0f0cbd;
 }
 
-/* * when a meal was selected */
+/* animation when a meal was selected */
 .mealWasSelected {
   animation: meal-was-selected;
   animation-duration: 1s;
@@ -159,11 +168,11 @@ header img {
 }
 
 .modal-content {
-  background: white;
+  background: #ffe4c4;
   padding: 2rem;
   border-radius: 10px;
   position: relative;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   animation-name: fade-slide-up;
   animation-duration: 1s;
@@ -185,6 +194,7 @@ header img {
   margin-top: 0;
   font-weight: bold;
   letter-spacing: 0.5px;
+  color: #15251c;
 }
 
 .modal-listItem {
@@ -256,15 +266,13 @@ header img {
 
 .modal-totalPrice {
   margin-left: auto;
+  color: #15251c;
 }
 
 .modal-checkoutButton {
   margin-top: 2.5%;
   margin-left: auto;
   width: 40%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  text-align: center;
 }
 
 .modal-close {
@@ -303,23 +311,67 @@ header img {
   margin-bottom: 40px;
 }
 
-/* FIX - some of the styles are probably useless */
-.form-item {
-  display: flex;
+.form-inputFields .lastTwo {
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  gap: 10px;
+  margin-bottom: 0px;
 }
 
-.form-label {
-  margin: 0px 5px;
+.form-inputFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-inputFieldWrapper label {
+  margin: 0;
   color: #29251c;
   font-weight: bold;
 }
 
+.form-inputFieldWrapper input {
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f2f2f2;
+  color: #29251c;
+  width: 70%;
+  outline: none;
+}
+
+.form-inputFields input:focus, .form-input-wasInvalid:focus {
+  outline: 2px solid #4a90e2 !important;
+}
+
+.form-input-wasInvalid {
+  outline: 1px solid #c44111 !important;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2.5%;
+}
+
+.formButtons-goBackButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.formButtons-submitButton span {
+  transform: translateY(0.5px);
+}
+
 .form-errors {
-  color: #c46111;
+  list-style: none;
+  color: #c44111;
   font-weight: bold;
+}
+
+.form-errors li:not(:last-child) {
+  margin-bottom: 5px;
 }
 
 .postForm-listItem {

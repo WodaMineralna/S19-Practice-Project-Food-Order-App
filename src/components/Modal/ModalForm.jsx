@@ -21,7 +21,7 @@ const ERROR_MESSAGES = {
 };
 
 export default function ModalchangeModalPageForm() {
-  const { submitOrder } = use(CartContext);
+  const { totalCartPrice, submitOrder } = use(CartContext);
   const { changeModalPage, setErrorMessage } = use(ModalContext);
 
   async function submitOrderAction(prevFormState, formData) {
@@ -32,17 +32,33 @@ export default function ModalchangeModalPageForm() {
     const city = formData.get("city");
 
     const errors = [];
+    const invalidInputs = [];
 
-    if (isEmpty(fullName) || !isLongEnough(fullName, 4))
+    if (isEmpty(fullName) || !isLongEnough(fullName, 4)) {
       errors.push(ERROR_MESSAGES.fullName);
-    if (!isEmailAdress(email)) errors.push(ERROR_MESSAGES.email);
-    if (isEmpty(street)) errors.push(ERROR_MESSAGES.street);
-    if (!isPostalCodeValid(postalCode)) errors.push(ERROR_MESSAGES.postalCode);
-    if (isEmpty(city)) errors.push(ERROR_MESSAGES.city);
+      invalidInputs.push("fullName");
+    }
+    if (!isEmailAdress(email)) {
+      errors.push(ERROR_MESSAGES.email);
+      invalidInputs.push("email");
+    }
+    if (isEmpty(street)) {
+      errors.push(ERROR_MESSAGES.street);
+      invalidInputs.push("street");
+    }
+    if (!isPostalCodeValid(postalCode)) {
+      errors.push(ERROR_MESSAGES.postalCode);
+      invalidInputs.push("postalCode");
+    }
+    if (isEmpty(city)) {
+      errors.push(ERROR_MESSAGES.city);
+      invalidInputs.push("city");
+    }
 
+    // DEBUG
     console.log(
       `Full Name: ${fullName}, Email: ${email}, Street: ${street}, Postal Code: ${postalCode}, City: ${city}`
-    ); // DEBUG
+    );
 
     console.log(errors);
 
@@ -56,9 +72,13 @@ export default function ModalchangeModalPageForm() {
           postalCode,
           city,
         },
+        invalidInputs: Object.fromEntries(
+          invalidInputs.map((input) => [input, "true"])
+        ),
       };
     }
 
+    // potential error message
     const errorMsg = await submitOrder({
       fullName,
       email,
@@ -95,6 +115,8 @@ export default function ModalchangeModalPageForm() {
 
   return (
     <form action={formAction}>
+      <h2 className="modal-listTitle">Checkout</h2>
+      <p className="modal-totalPrice">{`Total Amount: ${totalCartPrice}`}</p>
       <div className="form-inputFields">
         <InputField
           label="Full Name"
@@ -102,14 +124,16 @@ export default function ModalchangeModalPageForm() {
           name="fullName"
           type="text"
           defaultValue={formState.enteredValues?.fullName}
+          invalid={formState.invalidInputs?.fullName}
         />
 
         <InputField
-          label="E-Mail Adress"
+          label="E-Mail Address"
           id="email"
           name="email"
           type="email"
           defaultValue={formState.enteredValues?.email}
+          invalid={formState.invalidInputs?.email}
         />
 
         <InputField
@@ -118,31 +142,44 @@ export default function ModalchangeModalPageForm() {
           name="street"
           type="text"
           defaultValue={formState.enteredValues?.street}
+          invalid={formState.invalidInputs?.street}
         />
 
-        <InputField
-          label="Postal Code"
-          id="postalCode"
-          name="postalCode"
-          type="text"
-          placeholder="XX-XXX"
-          defaultValue={formState.enteredValues?.postalCode}
-        />
+        <div className="form-inputFields lastTwo">
+          <InputField
+            label="Postal Code"
+            id="postalCode"
+            name="postalCode"
+            type="text"
+            placeholder="XX-XXX"
+            defaultValue={formState.enteredValues?.postalCode}
+            invalid={formState.invalidInputs?.postalCode}
+          />
 
-        <InputField
-          label="City"
-          id="city"
-          name="city"
-          type="text"
-          defaultValue={formState.enteredValues?.city}
-        />
+          <InputField
+            label="City"
+            id="city"
+            name="city"
+            type="text"
+            defaultValue={formState.enteredValues?.city}
+            invalid={formState.invalidInputs?.city}
+          />
+        </div>
       </div>
       <div className="formButtons">
-        <button onClick={() => changeModalPage(1)} disabled={pending}>
-          Go back
+        <button
+          onClick={() => changeModalPage(1)}
+          disabled={pending}
+          className="formButtons-goBackButton"
+        >
+          <span>Go back</span>
         </button>
-        <button type="submit" disabled={pending}>
-          {pending ? "Submitting your order..." : "Submit Order"}
+        <button
+          type="submit"
+          disabled={pending}
+          className="general-button formButtons-submitButton"
+        >
+          <span>{pending ? "Submitting your order..." : "Submit Order"}</span>
         </button>
       </div>
       {formState.errors && (

@@ -1,10 +1,13 @@
-export default function InputField({ label, id, ...props }) {
+
+export default function InputField({ label, id, invalid, ...props }) {
   return (
-    <div className="form-inputField">
-      <label htmlFor={id} className="form-label">
-        {label}
-      </label>
-      <input id={id} {...props} />
+    <div className="form-inputFieldWrapper">
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        className={`${invalid ? "form-input-wasInvalid" : ""}`}
+        {...props}
+      />
     </div>
   );
 }
