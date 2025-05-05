@@ -9,10 +9,10 @@ export default function Meals() {
   const { availableMeals, isFetchingMeals, mealsErrorMessage } =
     use(MealsContext);
 
-  // console.log(
-  //   `Type: ${typeof availableMeals}, 🔥Fetched availableMeals: `,
-  //   availableMeals
-  // ); // DEBUG
+  // console.log(`JS Type of fetched Available Meals: ${typeof availableMeals}`); // DEBUG
+
+  // DEBUG
+  console.log("%cFetched availableMeals: ", "color: green;", availableMeals);
 
   if (isFetchingMeals) {
     return (

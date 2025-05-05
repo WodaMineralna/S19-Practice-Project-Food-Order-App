@@ -35,8 +35,6 @@ export function CartContextProvider({ children }) {
     initCartFunction
   );
 
-  // ?
-  // ?FIX check if it's not re-executed too many times for no reason
   const totalCartPrice =
     "$" +
     cart
@@ -92,7 +90,15 @@ export function CartContextProvider({ children }) {
     clearCart(initialCartState);
   }
 
-  console.log(`${typeof cart}, 🔥Cart data: 🔥`, cart); // DEBUG
+  // console.log(`JS Type of Cart: ${typeof cart}`); // DEBUG
+
+  // DEBUG
+  console.log(
+    `%cCart initialised / updated%c\nCurrent cart data: `,
+    "color: #ff6b6b",
+    "",
+    cart
+  );
 
   // submitting customers order to the backend
   async function submitOrder(customer) {
@@ -115,7 +121,13 @@ export function CartContextProvider({ children }) {
 
       const orderData = await response.json();
 
-      console.log("SUBMITTED ORDER: ", orderData); // DEBUG
+      // DEBUG
+      console.log(
+        "%cSUBMITTED ORDER:",
+        "color: #00bfa6; font-weight: bold; font-size: 1rem;",
+        orderData
+      );
+
       setSubmittedOrder({ ...orderData, totalCartPrice });
       clearCart(initialCartState);
     } catch (error) {

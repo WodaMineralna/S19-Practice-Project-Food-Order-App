@@ -16,12 +16,12 @@ export function ModalContextProvider({ children }) {
   const [modalErrorMessage, setModalErrorMessage] = useState(null);
 
   function handleOpenModal() {
-    console.log("Modal opened");
+    console.log("Modal Opened");
     setIsModalOpen(true);
   }
 
   function handleCloseModal() {
-    console.log("Modal closed");
+    console.log("Modal Closed");
     setIsModalOpen(false);
     setModalPageToShow(1);
   }

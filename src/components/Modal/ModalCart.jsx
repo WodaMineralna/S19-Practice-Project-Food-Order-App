@@ -14,6 +14,8 @@ export default function ModalCart() {
   } = use(CartContext);
   const { changeModalPage } = use(ModalContext);
 
+  const cartIsEmpty = cart.length === 0;
+
   return (
     <ul className="modal-list list-animation">
       <h2 className="modal-listTitle">Your Cart</h2>
@@ -43,8 +45,8 @@ export default function ModalCart() {
           </div>
         </li>
       ))}
-      <p className="modal-totalPrice">
-        {cart.length === 0 ? "Your cart is empty!" : `Total: ${totalCartPrice}`}
+      <p className={`modal-totalPrice ${cartIsEmpty && "modal-cartIsEmpty"}`}>
+        {cartIsEmpty ? "Your cart is empty!" : `Total: ${totalCartPrice}`}
       </p>
       {cart.length > 0 && (
         <button

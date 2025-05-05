@@ -2,7 +2,8 @@ import Header from "./components/Header";
 import Meals from "./components/Meals";
 import Modal from "./components/Modal/Modal";
 
-// TODO fix possible (xd) re-executes in all components
+// TODO fix possible (xd) unwanted component re-executes in all components
+// ^ should be good tho, should check (make sure) tho
 
 import { MealsContextProvider } from "./store/meals-context";
 import { CartContextProvider } from "./store/cart-context";

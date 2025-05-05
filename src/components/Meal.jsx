@@ -10,7 +10,7 @@ export default function Meal({ id, name, price, description, imgPath }) {
     addMeal(id, name, price);
 
     setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 1000);
+    setTimeout(() => setIsAnimating(false), 1000); // 1000ms - the 'Add to Cart' clicked button animation lasts 1s
   }
 
   return (

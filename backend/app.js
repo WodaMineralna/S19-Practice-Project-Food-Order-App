@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/meals", async (req, res) => {
-  console.log('Fetching available meals...') // DEBUGGING
+  console.log("Fetching available meals..."); // DEBUGGING
   const meals = await fs.readFile("./data/available-meals.json", "utf8");
   res.json(JSON.parse(meals));
 });
@@ -32,7 +32,6 @@ app.post("/orders", async (req, res) => {
     return res.status(400).json({ message: "Missing data." });
   }
 
-  // ? needed? data validation is in ModalForm.jsx
   if (
     orderData.customer.email === null ||
     !orderData.customer.email.includes("@") ||
@@ -53,7 +52,7 @@ app.post("/orders", async (req, res) => {
 
   const newOrder = {
     ...orderData,
-    orderId: Math.floor((Math.random() * 100000)).toString(),
+    orderId: Math.floor(Math.random() * 100000).toString(),
   };
   const orders = await fs.readFile("./data/orders.json", "utf8");
   const allOrders = JSON.parse(orders);

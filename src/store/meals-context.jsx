@@ -6,7 +6,6 @@ export const MealsContext = createContext({
   mealsErrorMessage: null,
 });
 
-// ?FIX less re-executes of the component
 export function MealsContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [isFetchingMeals, setIsFetchingMeals] = useState(false);

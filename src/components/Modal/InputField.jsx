@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-export default function InputField({ label, id, invalid, validationTrigger, ...props }) {
-  const [highlightInvalidInput, setHighlightInvalidInput] = useState(invalid)
+export default function InputField({
+  label,
+  id,
+  invalid,
+  validationTrigger,
+  ...props
+}) {
+  const [highlightInvalidInput, setHighlightInvalidInput] = useState(invalid);
 
   useEffect(() => {
-    setHighlightInvalidInput(invalid)
-  }, [invalid, validationTrigger])
+    setHighlightInvalidInput(invalid);
+  }, [invalid, validationTrigger]);
 
   return (
     <div className="form-inputFieldWrapper">

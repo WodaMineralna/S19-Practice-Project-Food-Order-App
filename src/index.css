@@ -313,6 +313,12 @@ header img {
   color: #15251c;
 }
 
+.modal-cartIsEmpty {
+  margin: auto auto 20px;
+  font-size: 1.5rem;
+  color: #e89e0a;
+}
+
 .modal-checkoutButton {
   margin-top: 2.5%;
   margin-left: auto;
@@ -326,12 +332,16 @@ header img {
   color: rgb(194, 59, 59);
 }
 
+.error-message h2 {
+  margin-top: 0px;
+}
+
 .error-message p {
   font-weight: bold;
 }
 
 .error-message strong {
-  color: #d7b719;
+  color: #29251c;
 }
 
 .form-inputFields {
@@ -402,86 +412,79 @@ header img {
   margin-bottom: 5px;
 }
 
-/* Success message styles */
 .postForm-successMessage {
   text-align: center;
-  color: #2d6a4f; /* Green for success */
+  margin-bottom: 1rem;
   font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  color: #2d6a4f;
 }
 
 .postForm-subMessage {
   text-align: center;
-  color: #495057; /* Neutral gray for subtext */
-  font-size: 1.2rem;
   margin-bottom: 2rem;
+  font-size: 1.2rem;
+  color: #495057;
 }
 
-/* Order details title */
 .postForm-orderDetailsTitle {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1b4332; /* Dark green for emphasis */
   margin-top: 2rem;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1b4332;
 }
 
-/* Order ID */
 .postForm-orderID {
   text-align: center;
+  margin-bottom: 1.5rem;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #40916c; /* Green for the order ID */
-  margin-bottom: 1.5rem;
+  color: #40916c;
 }
 
-/* Ordered food list */
 .postForm-list {
   list-style: none;
-  padding: 0;
-  margin: 0 auto;
   max-width: 600px;
-  background-color: #f8f9fa; /* Light background for contrast */
+  margin: 0 auto;
+  padding: 0;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
   overflow: hidden;
 }
 
 .postForm-listItem {
-  padding: 1rem;
-  border-bottom: 1px solid #dee2e6; /* Subtle divider */
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
   gap: 0.5rem;
 }
 
 .postForm-listItem:last-child {
-  border-bottom: none; /* Remove border for the last item */
+  border-bottom: none;
 }
 
-/* Price per piece */
 .postForm-pricePerPiece {
-  font-size: 0.9rem;
-  color: #6c757d; /* Muted gray for secondary text */
   margin: 0;
+  font-size: 0.9rem;
+  color: #6c757d;
 }
 
-/* Ordered food details */
 .postForm-foodDetails {
   font-size: 1rem;
   font-weight: bold;
-  color: #343a40; /* Dark text for readability */
+  color: #343a40;
 }
 
-/* Total price */
 .postForm-total {
   text-align: center;
+  margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1b4332; /* Dark green for emphasis */
-  margin-top: 2rem;
+  color: #1b4332;
 }
 
 /* for modal */
@@ -497,7 +500,7 @@ header img {
   }
 }
 
-/* after meal was added to the cart, even after additional clicks (+quantity) */
+/* after meal was added to the cart, even after additional clicks [+ meal quantity] */
 @keyframes meal-was-selected {
   0% {
     background-color: #d7b719;
@@ -513,6 +516,7 @@ header img {
   }
 }
 
+/* animation for the TrashIcon / Modal closing ['X'] button */
 @keyframes change-to-red {
   100% {
     color: rgba(237, 8, 8, 0.9);

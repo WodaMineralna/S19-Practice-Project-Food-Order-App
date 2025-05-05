@@ -6,7 +6,7 @@ import { ModalContext } from "../store/modal-context";
 import imgSrc from "../assets/logo.jpg";
 
 export default function Header() {
-  const { cart, resetCart } = use(CartContext);
+  const { cart } = use(CartContext);
   const { handleOpenModal } = use(ModalContext);
 
   return (
@@ -17,12 +17,6 @@ export default function Header() {
       </div>
       <button className="header-button" onClick={handleOpenModal}>
         Cart ({cart.length})
-      </button>
-      {/* // DEBUGGING - hidden for now, will be moved to ModalCart */}
-      {/* // TODO - move the 'Clear cart' button to ModalCart.jsx */}
-      {/* // * with a confirmation, preventing accidental taps */}
-      <button className="header-hidden" onClick={resetCart}>
-        Clear cart
       </button>
     </header>
   );

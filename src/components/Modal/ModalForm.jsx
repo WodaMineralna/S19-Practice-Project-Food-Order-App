@@ -24,8 +24,9 @@ export default function ModalForm() {
   const { totalCartPrice, submitOrder } = use(CartContext);
   const { changeModalPage, setErrorMessage } = use(ModalContext);
 
-  // goofy way to fix this simple unwanted behaviour xd
+  // ^ a goofy way to fix this simple unwanted behaviour xd
   // input validation trigger - in InputField.jsx
+  // so the validation (red outline) is added, even if the user submits the same, unchanged invalid input form data
   const [validationTrigger, setValidationTrigger] = useState(0);
 
   async function submitOrderAction(prevFormState, formData) {
@@ -59,12 +60,20 @@ export default function ModalForm() {
       invalidInputs.push("city");
     }
 
+    console.log(`Errors while submitting the form: `, errors); // DEBUG
+
     // DEBUG
     console.log(
-      `Full Name: ${fullName}, Email: ${email}, Street: ${street}, Postal Code: ${postalCode}, City: ${city}`
+      "%cEntered form data: %o",
+      "color: orange; font-weight: bold;",
+      {
+        fullName,
+        email,
+        street,
+        postalCode,
+        city,
+      }
     );
-
-    console.log(errors);
 
     if (errors.length > 0) {
       setValidationTrigger((prev) => prev + 1);
