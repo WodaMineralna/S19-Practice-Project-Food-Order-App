@@ -168,6 +168,7 @@ header img {
 }
 
 .modal-content {
+  color: #29251c;
   background: #ffe4c4;
   padding: 2rem;
   border-radius: 10px;
@@ -265,6 +266,9 @@ header img {
 }
 
 .modal-totalPrice {
+  display: flex;
+  align-items: flex-start;
+  height: 55px;
   margin-left: auto;
   color: #15251c;
 }
@@ -325,7 +329,6 @@ header img {
 
 .form-inputFieldWrapper label {
   margin: 0;
-  color: #29251c;
   font-weight: bold;
 }
 
@@ -335,7 +338,6 @@ header img {
   border-radius: 5px;
   font-size: 1rem;
   background-color: #f2f2f2;
-  color: #29251c;
   width: 70%;
   outline: none;
 }
