@@ -67,4 +67,4 @@ root/
 ---
 
 
-⭐⭐This project was built on my own, as part of the React course challenge: *"Dive in and learn React.js from scratch!"*⭐⭐
+⭐⭐This project was built on my own, as part of the React course challenge: "**React - The Complete Guide 2025**" by _Maximilian Schwarzmüller_ ⭐⭐
