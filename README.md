@@ -1,6 +1,6 @@
 # 🍽️ Food Order App
 
-A React-based food ordering web application built on my own as a part of a course challenge. Users can browse available meals, manage their cart, and place an order with form-based user data. Backend communication is handled via RESTful API calls.
+⭐ A React-based food ordering web application built on my own as a part of a course challenge. Users can browse available meals, manage their cart, and place an order with form-based user data. Backend communication is handled via RESTful API calls. ⭐
 
 ## 🚀 Features
 
@@ -12,29 +12,59 @@ A React-based food ordering web application built on my own as a part of a cours
 
 ## 🛠️ Tech Stack
 
-- React + Hooks
-- Context API for state management
-- CSS Modules for styling
-- Fetch API for backend communication
-- Basic input validation
+- **Frontend:** React, Hooks, Context API, CSS Modules
+- **Backend:** Node.js, Express
+- **Tooling:** Vite, Fetch API
 
 ## 📁 Project Structure (simplified)
-
-
-
-
+```
+root/
+├── backend/
+│ ├── data/
+│ └── app.js
+├── public/
+├── src/
+│ ├── assets/
+│ ├── components/
+│ │ ├── Modal/
+│ │ ├── ErrorMessage.jsx
+│ │ ├── Header.jsx
+│ │ ├── Meal.jsx
+│ │ └── Meals.jsx
+│ ├── store/
+│ ├── util/
+│ ├── App.jsx
+│ ├── main.jsx
+│ └── index.css
+├── index.html
+├── package.json
+├── vite.config.js
+```
 ## 📦 Getting Started
+
+### 🛠️ Backend
+
+1. Navigate to the backend folder  
+   `cd backend/`
+2. Install dependencies  
+   `npm install`
+3. Run the backend  
+   `node app.js`
+
+### ⚛️ Frontend
 
 1. Install dependencies  
    `npm install`
-
 2. Run the app  
-   `npm start`
+   `npm run dev`
 
-3. Backend is expected to expose the following endpoints:
+---
+
+   Backend is exposing the following endpoints:
    - `GET /meals` – returns available meals
    - `POST /orders` – accepts user + cart data
 
 ---
 
-This project was built on my own, as part of the React course challenge: *"Dive in and learn React.js from scratch!"*
+
+⭐⭐This project was built on my own, as part of the React course challenge: *"Dive in and learn React.js from scratch!"*⭐⭐
