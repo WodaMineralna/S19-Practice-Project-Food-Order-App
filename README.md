@@ -1,6 +1,6 @@
 # 🍽️ Food Order App
 
-⭐ A React-based food ordering web application built on my own as a part of a course challenge. Users can browse available meals, manage their cart, and place an order with form-based user data. Backend communication is handled via RESTful API calls. ⭐
+A React-based food ordering web application built on my own as a part of a course challenge. Users can browse available meals, manage their cart, and place an order with form-based user data. Backend communication is handled via RESTful API calls.
 
 ## 🚀 Features
 
@@ -67,4 +67,4 @@ root/
 ---
 
 
-⭐⭐This project was built on my own, as part of the React course challenge: "**React - The Complete Guide 2025**" by _Maximilian Schwarzmüller_ ⭐⭐
+⭐ This project was built on my own, as part of the React course challenge: "**React - The Complete Guide 2025**" by _Maximilian Schwarzmüller_
